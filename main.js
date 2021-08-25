@@ -1,17 +1,23 @@
-const boxesContainer = document.getElementById('boxes')
-const btn = document.getElementById('btn')
+const BGBox = {
+  container: document.getElementById('boxes'),
+  btn: document.getElementById('btn'),
 
-btn.addEventListener('click', () => boxesContainer.classList.toggle('big'))
-
-function createBoxes() {
-  for(let i = 0; i < 4; i++) {
-    for(let j = 0; j < 4; j++) {
-      const box = document.createElement('div')
-      box.classList.add('box')
-      box.style.backgroundPosition = `${-j * 125}px ${-i * 125}px`
-      boxesContainer.appendChild(box)
+  createBoxes() {
+    for(let column = 0; column < 4; column++) {
+      for(let item = 0; item < 4; item++) {
+        const box = document.createElement('div')
+        box.classList.add('box')
+        // item = x, column = y
+        box.style.backgroundPosition = `${-item * 125}px ${-column * 125}px`
+        BGBox.container.appendChild(box)
+      }
     }
+  },
+
+  start() {
+    BGBox.btn.addEventListener('click', () => BGBox.container.classList.toggle('big'))
+    BGBox.createBoxes()
   }
 }
 
-createBoxes()
+BGBox.start()
